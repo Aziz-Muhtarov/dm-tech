@@ -1,0 +1,11 @@
+.productCardContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: fit-content;
+    padding-top: 24px;
+}
