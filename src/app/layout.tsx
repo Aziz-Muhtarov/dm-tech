@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import Header from "@/components/header/header";
+import ReduxProvider from "@/components/Providers/ReduxProvider";
 import "./global.scss";
 
 export const metadata: Metadata = {
@@ -20,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ru" className={nunito.variable}>
       <body>
-        {children}
+        <ReduxProvider>
+          <Header />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import s from "./styles.module.scss";
 
 interface ProductCardProps {
@@ -14,33 +15,35 @@ interface ProductCardProps {
   rating: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  id,
-  category,
-  title,
-  description,
-  price,
-  picture,
-  rating,
-}) => {
-  console.log("Изображение:", picture);
+const ProductCard: React.FC<ProductCardProps> = ({id, title, price, picture, rating}) => {
+  const formatPrice = (price: number) => price.toLocaleString("ru-RU");
+  const router = useRouter();
+
+  useEffect(() => {
+    // Убедимся, что код выполняется только на клиенте
+    if (typeof window !== 'undefined') {
+      // Сохраняем текущий путь в sessionStorage
+      const currentPath = window.location.pathname;
+      sessionStorage.setItem('previousPage', currentPath);
+    }
+  }, []);
+
+  const handleClick = () => {
+    router.push(`/product/${id}`);
+  };
+
   return (
-    <div className={s.card}>
+    <div className={s.card} onClick={handleClick}>
       {/* Изображение товара */}
       <div className={s.imageWrapper}>
-        <Image src={picture} alt={title} width={250} height={250} />
+        <img src={picture} alt={title} className={s.image} />
       </div>
 
       {/* Информация о товаре */}
       <div className={s.content}>
-        <p className={s.category}>{category}</p>
         <h3 className={s.title}>{title}</h3>
-        <p className={s.description}>{description}</p>
-
-        <div className={s.footer}>
-          <span className={s.price}>{price} ₽</span>
-          <span className={s.rating}>⭐ {rating.toFixed(1)}</span>
-        </div>
+        <span className={s.rating}>⭐⭐⭐⭐⭐ {rating.toFixed(1)}</span>
+        <span className={s.price}>{formatPrice(price)} ₽</span>
       </div>
     </div>
   );

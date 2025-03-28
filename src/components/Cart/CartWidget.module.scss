@@ -1,0 +1,13 @@
+.cartWidget {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    .totalPrice {
+        font-size: 16px;
+        font-weight: bold;
+      }
+  }
+  
+  

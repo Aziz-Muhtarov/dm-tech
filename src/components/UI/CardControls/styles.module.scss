@@ -1,0 +1,48 @@
+.cartWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+
+    .cartControls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s ease-in-out;
+
+      .quantityWrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: #f3f3f3;
+        padding: 5px 10px;
+        border-radius: 8px;
+
+        .quantityButton {
+          min-width: 32px !important;
+          height: 32px !important;
+        }
+        
+        .quantity {
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+      
+      .checkoutButton {
+        flex-grow: 1;
+        white-space: nowrap;
+      }
+    }
+    
+    .addButton {
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .addButton:active {
+      transform: scale(0.95);
+    }
+}
+  
+  
