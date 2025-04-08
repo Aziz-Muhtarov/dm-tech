@@ -1,33 +1,47 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchCart, updateCartOnServer, submitOrder } from "./cartThunks";
+import { fetchCart, updateCartOnServer, submitOrder, CartResponse } from "./cartThunks";
+
+interface CartItem {
+  id: number;
+  title: string;
+  picture: string;
+  quantity: number;
+  price: number;
+}
 
 interface CartState {
-  items: { id: number; quantity: number; price: number }[];
+  items: CartItem[];
   totalAmount: number;
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: CartState = {
-  items: [],
-  totalAmount: 0,
-  status: "idle",
+    items: [],
+    totalAmount: 0,
+    status: "idle",
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<{ id: number; price: number }>) => {
+    addToCart: (state, action: PayloadAction<{ id: number; title: string; picture: string; price: number, quantity: number }>) => {
         if (!state.items) {
             state.items = []; // Если вдруг items оказался undefined
           }
       const existingItem = state.items.find((item) => item.id === action.payload.id);
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += action.payload.quantity; // Увеличиваем количество товара в корзине
       } else {
-        state.items.push({ id: action.payload.id, quantity: 1, price: action.payload.price });
+        state.items.push({
+          id: action.payload.id,
+          title: action.payload.title,
+          picture: action.payload.picture,
+          price: action.payload.price,
+          quantity: action.payload.quantity,
+        });
       }
-      console.log("Корзина после добавления:", state.items);
+      console.log("Корзина после добавления:!!!!!!!!!!", state.items);
       state.totalAmount = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
@@ -51,16 +65,13 @@ const cartSlice = createSlice({
       .addCase(fetchCart.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchCart.fulfilled, (state, action) => {
+      .addCase(fetchCart.fulfilled, (state, action: PayloadAction<CartResponse>) => {
         state.items = action.payload.items;
         state.totalAmount = action.payload.totalAmount;
         state.status = "idle";
       })
       .addCase(fetchCart.rejected, (state) => {
         state.status = "failed";
-      })
-      .addCase(updateCartOnServer.fulfilled, (state) => {
-        // Здесь не обновляем items и totalAmount, так как они не возвращаются
       })
       .addCase(submitOrder.fulfilled, (state) => {
         state.items = [];

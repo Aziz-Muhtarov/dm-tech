@@ -1,0 +1,45 @@
+.cartControls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 8px;
+
+    .quantityWrapper {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+      width: 156px;
+      height: 52px;
+      background-color: #E6F1FC;
+      border-radius: 10px;
+
+      .quantityButton {
+        display: flex;
+        align-items: center;
+        height: 52px;
+      }
+    }
+
+    .removeButton {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 700;
+      position: relative;
+      padding-left: 24px;
+
+      .image {
+        margin-right: 10px;
+      }
+    }
+    
+    .checkoutButton {
+      width: 182px;
+      height: 52px;
+      border-radius: 10px;
+      background-color: #0073E6;
+    }
+}
+  
+  

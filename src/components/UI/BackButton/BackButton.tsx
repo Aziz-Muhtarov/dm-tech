@@ -11,11 +11,9 @@ const BackButton = () => {
   console.log('Previous page:', previousPage); // Для дебага
 
   return (
-    <div className={s.backButtonWrapper}>
+    <div className={s.backButtonWrapper} onClick={() => router.push(previousPage)}>
       <Image src="/arrowLeft.svg" alt="reversArrow" width={16} height={14}/>
-      <button className={s.backButton} onClick={() => router.push(previousPage)}>
-        Назад
-      </button>
+      <button className={s.backButton}>Назад</button>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import s from "./styles.module.scss";
 import Image from 'next/image'
 import BackButton from "@/components/UI/BackButton/BackButton";
-import CartControls from "@/components/UI/CardControls/CardControls";
+import CartControls from "@/components/UI/CartControls/CartControls";
 
 interface ProductPageProps {
     params: {id: string};
@@ -33,7 +33,16 @@ export default async function ProductPage({params} : ProductPageProps) {
               <h1 className={s.title}>{product.title}</h1>
               <span className={s.rating}>⭐⭐⭐⭐⭐ {product.rating}</span>
               <span className={s.price}>{product.price} ₽</span>
-              <CartControls productId={product.id} price={product.price}/>
+              <CartControls 
+                productId={product.id} 
+                price={product.price} 
+                title={product.title} 
+                picture={product.picture} 
+                hideAddButton={false}
+                showCheckoutButton={true}
+                allowRemove={false}
+                mode="inline"
+              />
               <div className={s.titleWrapper}>
                 <Image src="/reversArrow.svg" alt="reversArrow" width={20} height={20}/>
                 <h2 className={s.title}>Условия возврата</h2>
