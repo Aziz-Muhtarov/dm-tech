@@ -17,7 +17,7 @@ export default function CartWidget() {
   });
 
   useEffect(() => {
-    dispatch(fetchCart() as any); // ✅ Загружаем корзину при старте
+    dispatch(fetchCart() as any);
   }, [dispatch]);
 
   return (

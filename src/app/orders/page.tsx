@@ -2,8 +2,7 @@ import OrderList from "@/components/OrderList/OrderList";
 
 const OrdersPage = () => {
   return (
-    <main>
-      <h1>Мои заказы</h1>
+    <main className="bg-[#F2F6FA] min-h-screen">
       <OrderList />
     </main>
   );

@@ -1,3 +1,56 @@
 .orderCard {
     display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-width: 1280px;
+    height: 96px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    padding: 24px;
+
+    .orderHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        text-align: left;
+
+        .orderTitle {
+            font-size: 16px;
+            color: #808080;
+        }
+
+        .orderNumber {
+            font-size: 20px;
+            color: #172029;
+            line-height: 24px;
+            font-weight: 700;
+        }
+    }
+    
+
+    .images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      
+      .image {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+    .orderDetails {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        align-items: right;
+        width: 864px;
+
+        
+    }
 }

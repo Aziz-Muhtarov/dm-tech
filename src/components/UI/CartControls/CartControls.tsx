@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { addToCart, updateQuantity, removeFromCart } from "@/redux/cartSlice";
-import type { CartItem } from "@/redux/cartThunks";
+import { submitOrder, updateCartOnServer } from "@/redux/cartThunks";
 import Button from "@mui/material/Button";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
@@ -79,28 +78,9 @@ const CartControls = ({
   // Функция для отправки заказа на сервер
   const handleCheckout = async () => {
     try {
-      // Получаем все товары в корзине
-      const items: CartItem[] = useSelector((state: RootState) => state.cart.items);
-      
-      const orderData = {
-        items: items.map(item => ({
-          id: item.id,
-          quantity: item.quantity,
-          price: item.price,
-          title: item.title,
-          picture: item.picture
-        })),
-        totalAmount: totalAmount
-      };
-
-      const response = await axios.post("https://skillfactory-task.detmir.team/orders", orderData);
-      if (response.status === 200) {
-        alert("Заказ оформлен успешно");
-        // Очистить корзину после успешного оформления
-        dispatch(removeFromCart(productId)); // Удаляем конкретный товар или все товары, если необходимо
-      } else {
-        alert("Ошибка при оформлении заказа");
-      }
+      await dispatch(updateCartOnServer() as any);
+      await dispatch(submitOrder() as any);
+      alert("Заказ оформлен успешно");
     } catch (error) {
       alert("Ошибка при оформлении заказа");
     }

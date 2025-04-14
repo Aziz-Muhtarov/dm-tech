@@ -20,7 +20,6 @@ const ProductCard: React.FC<ProductCardProps> = ({id, title, price, picture, rat
   const router = useRouter();
 
   useEffect(() => {
-    // Убедимся, что код выполняется только на клиенте
     if (typeof window !== 'undefined') {
       // Сохраняем текущий путь в sessionStorage
       const currentPath = window.location.pathname;
